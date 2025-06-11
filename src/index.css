@@ -1,0 +1,124 @@
+@import "tailwindcss";
+*{
+  box-sizing: border-box;
+}
+body{
+   user-select: none;
+  -webkit-user-drag: none;
+  scroll-behavior: smooth;
+}
+.lq {
+  font-family: "Lovers Quarrel", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.hero-section {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+
+
+     /* offwhite: '#f8f9fa',
+      champagne: '#f7e7ce',
+      pearl: '#f0ebe3',
+      lavender: '#e6e6fa',
+      rosegold: '#b76e79',
+      neonpink: '#ff4ffb',
+      babyblue: '#d4f1f9',
+      mint: '#b8f2e6',
+      softgold: '#f5deb3', */
+
+      @keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes eq1 {
+  0%, 100% { height: 0.25rem; }
+  50% { height: 1rem; }
+}
+@keyframes eq2 {
+  0%, 100% { height: 0.5rem; }
+  50% { height: 1.25rem; }
+}
+@keyframes eq3 {
+  0%, 100% { height: 0.75rem; }
+  50% { height: 1.5rem; }
+}
+
+.animate-eq1 {
+  animation: eq1 0.6s infinite ease-in-out;
+}
+.animate-eq2 {
+  animation: eq2 0.8s infinite ease-in-out;
+}
+.animate-eq3 {
+  animation: eq3 1s infinite ease-in-out;
+}
+
+@keyframes glowRing {
+  0% {
+    box-shadow: 0 0 0px rgba(167, 30, 240, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(167, 30, 240, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(167, 30, 240, 0.3);
+  }
+}
+.animate-glow {
+  animation: glowRing 2s infinite;
+}
+
+  body {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  #petal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: -50px;
+  background-image: url('/rose-petal.png'); /* transparent PNG */
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  animation: fall linear infinite;
+  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}

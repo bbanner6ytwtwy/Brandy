@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lovers+Quarrel&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRANDY</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+<div id="petal-container" class=""></div>
+
+<script defer>
+ const container = document.getElementById("petal-container");
+
+// Array of image URLs for different leaves
+const petalImages = [
+  "/rose-petal.png",  // 🌿 Leaf or petal 1
+  "/pink-petal.png",  // 🍂 Leaf or petal 2
+  "/orange-petal.png"   // 🌸 Petal 3
+];
+
+for (let i = 0; i < 30; i++) {
+  const petal = document.createElement("div");
+  petal.classList.add("petal");
+
+  // 🌸 Randomize position and speed
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+
+  // 🌸 Randomize size
+  const size = 10 + Math.random() * 30;
+  petal.style.width = `${size}px`;
+  petal.style.height = `${size}px`;
+
+  // 🌸 Randomize opacity
+  petal.style.opacity = 0.6 + Math.random() * 0.4;
+
+  // 🌸 Random image
+  const img = petalImages[Math.floor(Math.random() * petalImages.length)];
+  petal.style.backgroundImage = `url('${img}')`;
+
+  // 🌸 Styling
+  petal.style.backgroundSize = "cover";
+  petal.style.position = "absolute";
+  petal.style.top = "-50px";
+  petal.style.zIndex = "100";
+  petal.style.pointerEvents = "none";
+
+  container.appendChild(petal);
+}
+
+</script>
+
+  </head>
+  <body>
+    <div id="root" class=""></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
