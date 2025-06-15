@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const Hero = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
   const toggleAudio = () => {
     const audio = audioRef.current;
@@ -58,6 +59,68 @@ const Hero = () => {
 
   return (
     <>
+      {/* NAVIGATION BAR */}
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-gradient-to-r from-pink-200/30 via-purple-200/30 to-pink-300/30 border-b border-white/20 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Brand */}
+            <div className="flex-shrink-0 text-2xl sm:text-3xl font-bold text-purple-800 italic tracking-wider">
+              Brandy ✨
+            </div>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex space-x-6">
+              {["Home", "Affirmations", "Music", "About"].map((label) => (
+                <a
+                  key={label}
+                  href={`#${label.toLowerCase()}`}
+                  className="text-purple-800 hover:text-rose-600 transition duration-300 font-medium relative group"
+                >
+                  {label}
+                  <span className="block h-[2px] bg-rose-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a>
+              ))}
+            </div>
+
+            {/* Hamburger Icon */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setNavOpen(!navOpen)}
+                className="text-purple-800 focus:outline-none"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  {navOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Nav */}
+        {navOpen && (
+          <div className="md:hidden bg-pink-50/60 backdrop-blur-xl">
+            <div className="px-4 pt-2 pb-4 space-y-2">
+              {["Home", "Affirmations", "Music", "About"].map((label) => (
+                <a
+                  key={label}
+                  href={`#${label.toLowerCase()}`}
+                  onClick={() => setNavOpen(false)}
+                  className="block text-purple-800 hover:text-rose-600 transition duration-300 font-medium"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
       <audio ref={audioRef} src="/epic.mp3" preload="auto" />
 
       <div className="relative w-full h-screen flex flex-col items-center justify-center px-6 sm:px-10 pt-24 pb-16 bg-[rgba(255,255,255,0.05)] overflow-y-auto">
@@ -72,31 +135,28 @@ const Hero = () => {
 
         <div className="w-full overflow-hidden whitespace-nowrap mt-8 relative">
           <div className="inline-block animate-marquee">
-                        <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "I am more. I am meant for more." · "The goddess within me rises." · "Strength. Grace. Power." · "Brandy, you are unstoppable." · 
-                "Born of stars, shaped by fire." · "You carry Athena’s wisdom." · "Every day you bloom."
-              </span>
-              <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "I am more. I am meant for more." · "The goddess within me rises." · "Strength. Grace. Power." · "Brandy, you are unstoppable." · 
-                "Born of stars, shaped by fire." · "You carry Athena’s wisdom." · "Every day you bloom."
-              </span>
-              <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "Brandy, your soul is rare light." · "You move with purpose and magic." · "You’re not a storm — you’re the sky." · "You bend reality with your belief."
-              </span>
-              <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "Brandy, your strength is quiet thunder." · "The world shifts in your presence." · "You rise with beauty and fire." · "You lead with heart and instinct."
-              </span>
-              <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "Your courage echoes through generations." · "Brandy, you are a living miracle." · "Every scar on you shines like armor." · "You were born to transform the world."
-              </span>
-              <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
-                "Brandy, your mind is a universe of stars." · "You embody power wrapped in elegance." · "You’re the heroine of your own legend." · "You make every space sacred."
-              </span>
+            {/* Repeating affirmations */}
+            <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
+              "I am more. I am meant for more." · "The goddess within me rises." · "Strength. Grace. Power." · "Brandy, you are unstoppable." · 
+              "Born of stars, shaped by fire." · "You carry Athena’s wisdom." · "Every day you bloom."
+            </span>
+            <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
+              "Brandy, your soul is rare light." · "You move with purpose and magic." · "You’re not a storm — you’re the sky." · "You bend reality with your belief."
+            </span>
+            <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
+              "Brandy, your strength is quiet thunder." · "The world shifts in your presence." · "You rise with beauty and fire." · "You lead with heart and instinct."
+            </span>
+            <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
+              "Your courage echoes through generations." · "Brandy, you are a living miracle." · "Every scar on you shines like armor." · "You were born to transform the world."
+            </span>
+            <span className="mx-4 text-xl sm:text-2xl font-semibold text-purple-900">
+              "Brandy, your mind is a universe of stars." · "You embody power wrapped in elegance." · "You’re the heroine of your own legend." · "You make every space sacred."
+            </span>
           </div>
         </div>
 
         {/* MUSIC BUTTON WITH GLOW + BARS */}
-        <div className="mt-10 relative flex flex-col items-center justify-center">
+        <div className="mt-10 relative flex flex-col items-center justify-center" id="music">
           {isPlaying && (
             <div className="absolute -top-5 flex gap-[2px] h-4 z-10">
               {Array.from({ length: 14 }).map((_, i) => (

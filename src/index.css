@@ -6,14 +6,42 @@ body{
    user-select: none;
   -webkit-user-drag: none;
   scroll-behavior: smooth;
+  scrollbar-color: white;
 }
+/* Custom Scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* translucent track */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(236, 72, 153, 0.4), rgba(139, 92, 246, 0.4)); /* pink to purple */
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* soft border for contrast */
+  backdrop-filter: blur(4px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(236, 72, 153, 0.6), rgba(139, 92, 246, 0.6));
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 37, 146, 0.4) rgba(255, 255, 255, 0.1);
+}
+
 .lq {
   font-family: "Lovers Quarrel", cursive;
   font-weight: 400;
   font-style: normal;
 }
 .hero-section {
-  background: rgba(255, 255, 255, 0.6);
+  background: #fff;
   backdrop-filter: blur(8px);
 }
 @keyframes marquee {
