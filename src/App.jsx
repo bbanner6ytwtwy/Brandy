@@ -4,19 +4,102 @@ import AffirmationOfTheDay from "./components/AffirmationofTheDay";
 import EvilWomenSlider from "./components/EvilwomenSlider";
 import GrowingHerMind from "./components/GrowingHerMind";
 import FooterBrandy from "./components/FooterBrandy";
-function SplashScreen() {
+
+function getCurrentPasscode() {
+  const baseYear = 2025;
+  const offset = new Date().getFullYear() - baseYear;
+  const firstTwo = 15 + offset;
+  const lastTwo = 21 + offset;
+  return `${firstTwo}${lastTwo}`;
+}
+
+function Toast({ message, isError }) {
   return (
-    <div className="fixed bg-[rgba(255, 255, 255, 0.9)] hero-section inset-0 w-[100%] h-[100vh] flex items-center justify-center z-50">
-      <h1 className="text-4xl lg:text-7xl lq font-bold text-black text-center ">
+    <div
+      className={`fixed top-6 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full shadow-xl text-white font-semibold z-[9999] transition-all duration-500
+        ${isError ? "bg-gradient-to-r from-red-500 to-red-700" : "bg-gradient-to-r from-purple-500 to-pink-500"}
+      `}
+    >
+      {message}
+    </div>
+  );
+}
+
+function SplashScreen({ onAccessGranted }) {
+  const [input, setInput] = useState(["", "", "", ""]);
+  const [toast, setToast] = useState({ show: false, message: "", isError: false });
+  const passcode = getCurrentPasscode();
+
+  const showToast = (msg, isError = false) => {
+    setToast({ show: true, message: msg, isError });
+    setTimeout(() => setToast({ show: false, message: "", isError: false }), 3000);
+  };
+
+  const handleChange = (index, direction) => {
+    setInput(prev => {
+      const newVal = [...prev];
+      let current = parseInt(newVal[index] || 0);
+      current = (current + (direction === "up" ? 1 : 9)) % 10;
+      newVal[index] = String(current);
+      return newVal;
+    });
+  };
+
+  const handleSubmit = () => {
+    const entered = input.join("");
+    if (entered === passcode) {
+      showToast("Welcome Brandy 💖", false);
+      setTimeout(() => onAccessGranted(), 1000);
+    } else {
+      showToast("Fuck off intruder, you're n0t brandy", true);
+    }
+  };
+
+  return (
+    <div className="fixed bg-[rgba(255,255,255,0.95)] inset-0 w-full h-full flex flex-col items-center justify-center z-50">
+      {toast.show && <Toast message={toast.message} isError={toast.isError} />}
+
+      <h1 className="text-4xl lg:text-6xl font-bold text-black text-center mb-10">
         Welcome Brandy. 💖
       </h1>
+
+      <div className="flex space-x-4">
+        {input.map((num, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center neumorphic rounded-xl p-4 bg-white shadow-inner"
+          >
+            <button
+              onClick={() => handleChange(index, "up")}
+              className="text-purple-700 text-2xl font-bold hover:scale-110 transition"
+            >
+              ▲
+            </button>
+            <div className="text-3xl font-semibold text-black py-2 min-w-[2rem] text-center">
+              {num || "0"}
+            </div>
+            <button
+              onClick={() => handleChange(index, "down")}
+              className="text-purple-700 text-2xl font-bold hover:scale-110 transition"
+            >
+              ▼
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={handleSubmit}
+        className="mt-8 px-6 py-2 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition"
+      >
+        Enter
+      </button>
     </div>
   );
 }
 
 function MainContent() {
   return (
-    <> 
     <div className="overflow-hidden">
       <Hero />
       <AffirmationOfTheDay />
@@ -24,25 +107,16 @@ function MainContent() {
       <GrowingHerMind />
       <FooterBrandy />
     </div>
-    </>
   );
 }
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowSplash(false);
-    }, 8000); // 8 seconds
-
-    return () => clearTimeout(timeout);
-  }, []);
+  const [accessGranted, setAccessGranted] = useState(false);
 
   return (
     <>
-      {showSplash && <SplashScreen />}
-      {!showSplash && <MainContent />}
+      {!accessGranted && <SplashScreen onAccessGranted={() => setAccessGranted(true)} />}
+      {accessGranted && <MainContent />}
     </>
   );
 }

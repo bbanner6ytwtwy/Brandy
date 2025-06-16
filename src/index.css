@@ -150,3 +150,9 @@ body{
     opacity: 0;
   }
 }
+.neumorphic {
+  background: #e0e0e0;
+  box-shadow: 8px 8px 16px #bebebe,
+              -8px -8px 16px #ffffff;
+  border-radius: 16px;
+}
