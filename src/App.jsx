@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import Hero from "./components/Hero";
-import AffirmationOfTheDay from "./components/AffirmationofTheDay";
-import EvilWomenSlider from "./components/EvilwomenSlider";
-import GrowingHerMind from "./components/GrowingHerMind";
-import FooterBrandy from "./components/FooterBrandy";
+import { useState } from "react";
+import Home from "./pages/Home"; // ✅ This assumes you have a file at: src/pages/Home.jsx
 
+// Passcode generator function
 function getCurrentPasscode() {
   const baseYear = 2025;
   const offset = new Date().getFullYear() - baseYear;
@@ -13,6 +10,7 @@ function getCurrentPasscode() {
   return `${firstTwo}${lastTwo}`;
 }
 
+// Toast notification
 function Toast({ message, isError }) {
   return (
     <div
@@ -25,6 +23,7 @@ function Toast({ message, isError }) {
   );
 }
 
+// Splash screen login
 function SplashScreen({ onAccessGranted }) {
   const [input, setInput] = useState(["", "", "", ""]);
   const [toast, setToast] = useState({ show: false, message: "", isError: false });
@@ -98,25 +97,16 @@ function SplashScreen({ onAccessGranted }) {
   );
 }
 
-function MainContent() {
-  return (
-    <div className="overflow-hidden">
-      <Hero />
-      <AffirmationOfTheDay />
-      <EvilWomenSlider />
-      <GrowingHerMind />
-      <FooterBrandy />
-    </div>
-  );
-}
-
-export default function App() {
+// Main app content
+function App() {
   const [accessGranted, setAccessGranted] = useState(false);
 
   return (
     <>
       {!accessGranted && <SplashScreen onAccessGranted={() => setAccessGranted(true)} />}
-      {accessGranted && <MainContent />}
+      {accessGranted && <Home />}
     </>
   );
 }
+
+export default App;
