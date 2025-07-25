@@ -411,7 +411,7 @@ const Hero = () => {
 
       <audio ref={audioRef} src="/epic.mp3" preload="auto" />
 
-      <div className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 pt-24 pb-16 bg-[rgba(255,255,255,0.05)] text-black overflow-y-auto">
+      <div className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 pt-24 pb-16 bg-[rgba(255,255,255,0.05)] mt-10 text-black overflow-y-auto">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-center mb-4 tracking-wide leading-tight">
           Hey Brandy 🌺
         </h1>
