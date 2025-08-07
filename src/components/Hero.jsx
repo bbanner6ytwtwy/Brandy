@@ -270,6 +270,7 @@
 
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom'; // ✅ Use Link for navigation
+import SnakeGame from './Snake';
 
 const Hero = () => {
   const audioRef = useRef(null);
@@ -472,7 +473,6 @@ const Hero = () => {
           </div>
         )}
       </div>
-
       {showModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[1000]">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-xs text-center">
